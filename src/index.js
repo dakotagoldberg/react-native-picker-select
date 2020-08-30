@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 import { Picker } from '@react-native-community/picker';
 import { defaultStyles } from './styles';
+import withTheme from '../../../src/themes/withTheme'
 
-export default class RNPickerSelect extends PureComponent {
+class RNPickerSelect extends PureComponent {
     static propTypes = {
         onValueChange: PropTypes.func.isRequired,
         items: PropTypes.arrayOf(
@@ -270,7 +271,7 @@ export default class RNPickerSelect extends PureComponent {
                     label={item.label}
                     value={item.value}
                     key={item.key || item.label}
-                    color={item.color}
+                    color={this.props.theme.primaryTextColor}
                 />
             );
         });
@@ -295,7 +296,12 @@ export default class RNPickerSelect extends PureComponent {
 
         return (
             <View
-                style={[defaultStyles.modalViewMiddle, style.modalViewMiddle]}
+                style={[{...defaultStyles.modalViewMiddle, 
+                        backgroundColor: this.props.theme.backgroundColor, 
+                        borderTopColor: this.props.theme.backgroundColor,
+                        borderTopStartRadius: 30,
+                        borderTopEndRadius: 30,
+                    }, style.modalViewMiddle]}
                 testID="input_accessory_view"
             >
                 <View style={[defaultStyles.chevronContainer, style.chevronContainer]}>
@@ -349,7 +355,7 @@ export default class RNPickerSelect extends PureComponent {
                             testID="done_text"
                             allowFontScaling={false}
                             style={[
-                                defaultStyles.done,
+                                {...defaultStyles.done, color: this.props.theme.primaryTextColor},
                                 style.done,
                                 doneDepressed
                                     ? [defaultStyles.doneDepressed, style.doneDepressed]
@@ -449,7 +455,7 @@ export default class RNPickerSelect extends PureComponent {
                     {this.renderInputAccessoryView()}
                     <View
                         style={[
-                            defaultStyles.modalViewBottom,
+                            {...defaultStyles.modalViewBottom, backgroundColor: this.props.theme.backgroundColor, shadowColor: this.props.theme.panelTextColorDark},
                             { height: orientation === 'portrait' ? 215 : 162 },
                             style.modalViewBottom,
                         ]}
@@ -565,3 +571,4 @@ export default class RNPickerSelect extends PureComponent {
 }
 
 export { defaultStyles };
+export default withTheme(RNPickerSelect)
