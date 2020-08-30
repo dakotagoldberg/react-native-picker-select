@@ -29,7 +29,7 @@ export const defaultStyles = StyleSheet.create({
         width: 15,
         height: 15,
         backgroundColor: 'transparent',
-        borderColor: '#a1a1a1',
+        borderColor: 'transparent',
         borderTopWidth: 1.5,
         borderRightWidth: 1.5,
     },
@@ -56,7 +56,12 @@ export const defaultStyles = StyleSheet.create({
     },
     modalViewBottom: {
         justifyContent: 'center',
+        marginTop: -30,
         backgroundColor: '#d0d4da',
+        borderTopStartRadius: 30,
+        borderTopEndRadius: 30,
+        shadowOpacity: 0.59,
+        shadowRadius: 50,
     },
     placeholder: {
         color: '#c7c7cd',
